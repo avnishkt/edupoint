@@ -1,8 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../components/assets/images/logo.png"; // Ensure the correct path and extension
+import { TfiViewList } from "react-icons/tfi";
 
 export default function Navbar() {
+
+  useEffect(() => {
+    // Toggle navbar for mobile
+    const navbar = document.querySelector("[data-navbar]");
+    const overlay = document.querySelector("[data-overlay]");
+    const navTogglers = document.querySelectorAll("[data-nav-toggler]");
+    const navLinks = document.querySelectorAll("[data-nav-link]");
+
+    const toggleNavbar = () => {
+      navbar.classList.toggle("active");
+      overlay.classList.toggle("active");
+    };
+
+    const closeNavbar = () => {
+      navbar.classList.remove("active");
+      overlay.classList.remove("active");
+    };
+
+    navTogglers.forEach(toggler => toggler.addEventListener("click", toggleNavbar));
+    navLinks.forEach(link => link.addEventListener("click", closeNavbar));
+
+    return () => {
+      navTogglers.forEach(toggler => toggler.removeEventListener("click", toggleNavbar));
+      navLinks.forEach(link => link.removeEventListener("click", closeNavbar));
+    };
+  }, []);
+
   return (
     <div>
       <header className="header" data-header>
@@ -11,6 +39,9 @@ export default function Navbar() {
             <img src={logo} width="162" height="50" alt="EduWeb logo" />
           </Link>
 
+          {/* Toggler button for mobile */}
+         
+
           <nav className="navbar" data-navbar>
             <div className="wrapper">
               <Link to="/" className="logo">
@@ -18,7 +49,9 @@ export default function Navbar() {
               </Link>
 
               <button className="nav-close-btn" aria-label="close menu" data-nav-toggler>
-                {/* <ion-icon name="close-outline" aria-hidden="true"></ion-icon> */}
+                {/* You can use an icon for close here */}
+                <p>🥡</p>
+                <span className="close-icon"></span>
               </button>
             </div>
 
@@ -44,6 +77,7 @@ export default function Navbar() {
           <div className="header-actions">
             <button className="header-action-btn" aria-label="toggle search" title="Search">
               {/* <ion-icon name="search-outline" aria-hidden="true"></ion-icon> */}
+              <p>🔍</p>
             </button>
 
             <button className="header-action-btn" aria-label="cart" title="Cart">
@@ -54,11 +88,14 @@ export default function Navbar() {
             <Link to="#" className="btn has-before">
               <span className="span">Try for free</span>
               {/* <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon> */}
+              <p>❤️</p>
             </Link>
-
-            <button className="header-action-btn" aria-label="open menu" data-nav-toggler>
-              {/* <ion-icon name="menu-outline" aria-hidden="true"></ion-icon> */}
-            </button>
+            <p>{" "}</p>
+            <button className="header-action-btn mobile-navi-toggler" aria-label="open menu" data-nav-toggler>
+            {/* You can add an icon here like an SVG or an image */}
+            <TfiViewList/>
+            <span className="hamburger-icon"></span>
+          </button>
           </div>
 
           <div className="overlay" data-nav-toggler data-overlay></div>
