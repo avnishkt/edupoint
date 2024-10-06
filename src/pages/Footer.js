@@ -21,7 +21,7 @@ export default function Footer() {
 
               <div className="wrapper">
                 <span className="span">Add:</span>
-                <address className="address">70-80 Pryagraj Uttar Pradesh India</address>
+                <address className="address">70-80 Prayagraj Uttar Pradesh India</address>
               </div>
 
               <div className="wrapper">

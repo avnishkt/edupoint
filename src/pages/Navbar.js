@@ -40,7 +40,7 @@ export default function Navbar() {
           </Link>
 
           {/* Toggler button for mobile */}
-         
+
 
           <nav className="navbar" data-navbar>
             <div className="wrapper">
@@ -85,17 +85,17 @@ export default function Navbar() {
               <span className="btn-badge">0</span>
             </button>
 
-            <Link to="#" className="btn has-before">
+            <a href="https://www.youtube.com/@ChemicalLOCHArajneeshpandey" className="btn has-before">
               <span className="span">Try for free</span>
               {/* <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon> */}
               <p>❤️</p>
-            </Link>
+            </a>
             <p>{" "}</p>
             <button className="header-action-btn mobile-navi-toggler" aria-label="open menu" data-nav-toggler>
-            {/* You can add an icon here like an SVG or an image */}
-            <TfiViewList/>
-            <span className="hamburger-icon"></span>
-          </button>
+              {/* You can add an icon here like an SVG or an image */}
+              <TfiViewList />
+              <span className="hamburger-icon"></span>
+            </button>
           </div>
 
           <div className="overlay" data-nav-toggler data-overlay></div>
