@@ -1,5 +1,7 @@
 const express = require("express");
 const connectDb = require("./config/db");
+const errorHandler = require("./utils/errorHandler");
+const router = require("./routes/userRoute");
 const app = express();
 require("dotenv").config(); 
 
@@ -12,7 +14,6 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "The engine is set up now" });
 });
 
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Internal Server Error", error: err.message });
@@ -22,9 +23,12 @@ app.use((err, req, res, next) => {
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
+app.use('/api',router);
 
 
 const PORT = process.env.PORT || 8000;
+app.use(errorHandler);
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
