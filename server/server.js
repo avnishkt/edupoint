@@ -1,7 +1,7 @@
 const express = require("express");
 const connectDb = require("./config/db");
 const errorHandler = require("./utils/errorHandler");
-const router = require("./routes/userRoute");
+const userRouter = require("./routes/userRoute");
 const app = express();
 require("dotenv").config(); 
 
@@ -9,7 +9,7 @@ connectDb();
 
 app.use(express.json());
 
-
+app.use('/api/users', userRouter); 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "The engine is set up now" });
 });
@@ -23,7 +23,7 @@ app.use((err, req, res, next) => {
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
-app.use('/api',router);
+app.use('/api/users', userRouter); 
 
 
 const PORT = process.env.PORT || 8000;
