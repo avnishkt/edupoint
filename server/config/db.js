@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const seed = require('../utils/seed');
 require('dotenv').config();
 
 const options = {
@@ -20,7 +21,10 @@ const connectDb = async () => {
     try {
         
         await mongoose.connect(mongoUri, options);
+
         console.log("✅ Database connected successfully");
+    //    seed();
+
     } catch (error) {
         console.error(`❌ Database connection failed: ${error.message}`);
        

@@ -43,7 +43,8 @@ const createUser = catchAsyncAwait(async (req, res, next) => {
     
     newUser.refreshToken = refreshToken;
     await newUser.save(); 
-
+    req.user =newUser._id;
+ 
     
     res.cookie('accessToken', accessToken, {
         httpOnly: true, 
@@ -67,7 +68,8 @@ const createUser = catchAsyncAwait(async (req, res, next) => {
 
 // Logout user and clear the cookie
 const logoutUser = catchAsyncAwait(async (req, res) => {
-    res.clearCookie('refreshToken'); 
+    
+    res.clearCookie('accessToken'); 
     res.status(200).json({ success: true, message: 'Logged out successfully' });
 });
 
@@ -79,11 +81,12 @@ const loginUser = catchAsyncAwait(async (req, res, next) => {
     if (!existingUser) {
         return next(new CustomError('Invalid email or password', 400));
     }
-
-    const match = await bcrypt.compare(password, existingUser.password);
+    const match = existingUser.isPasswordCorrect;
     if (!match) {
         return next(new CustomError('Invalid email or password', 400));
     }
+    console.log(1)
+
 
     // Generate tokens for the user
     const { accessToken, refreshToken } = await generateAccessTokenRefreshToken(existingUser._id);
@@ -92,7 +95,7 @@ const loginUser = catchAsyncAwait(async (req, res, next) => {
     existingUser.refreshToken = refreshToken;
     await existingUser.save();
 
-  
+  req.user =existingUser._id;
     res.cookie('accessToken', accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',

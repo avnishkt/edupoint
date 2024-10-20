@@ -1395,5 +1395,46 @@ body {
 /* Show mobile nav toggler only on screens smaller than 768px */
 @media (max-width: 768px) {
   .mobile-navi-toggler {
-    display: inline-block; /* Show only on mobile */
-  }}
+    display: inline-block; 
+    /* Show only on mobile */
+  }
+}
+@media (min-width: 1200px) {
+  
+.form{
+  margin-left:7rem;
+}}
+  
+
+  .label{
+    text-shadow:beige;
+    font-size: 3rem;
+    
+
+  }
+  .input{
+    border: 0.2rem solid rgba(4, 9, 27, 0.093);
+    border-radius: 3rem;
+    width:inherit;
+    transition:  0.4s ease-in-out;
+    padding:0.7rem 1rem;
+    font-size: 2rem;
+  }
+  .form{
+    display: flex;
+    justify-content: center;
+    border: 0.2rem solid rgb(1, 5, 20);
+    margin-bottom: 1rem;
+    padding: 2rem;
+    border-radius: 3rem;
+    width: 35rem;
+    margin: 7.5rem;
+    margin-left:40rem;
+
+    
+  
+  }
+  med
+  .register{
+    border-radius: 5rem;
+  }

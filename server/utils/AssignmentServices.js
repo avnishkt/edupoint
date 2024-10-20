@@ -1,8 +1,8 @@
 
-const Assignment = require('../model/assignment');
+const Assignment = require('../model/asignment');
 const CustomError = require('./CoustomError'); 
 
-const getAssignments = async (filters, page, limit) => {
+const getAssignmentservice = async (filters, page, limit) => {
     const query = {};
 
     
@@ -46,5 +46,5 @@ const getAssignments = async (filters, page, limit) => {
 };
 
 module.exports = {
-    getAssignments,
+    getAssignmentservice,
 };

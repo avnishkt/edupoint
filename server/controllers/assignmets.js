@@ -1,14 +1,16 @@
 const Assignment = require('../model/asignment');
-const Assignment=require('../model/asignment');
+const { getAssignmentservice } = require('../utils/AssignmentServices');
 const catchAsyncAwait = require('../utils/CatchAsync');
 const CustomError = require('../utils/CoustomError');
 
 const createAssignments = catchAsyncAwait(async (req, res, next) => {
     
     const { title, category, price, tags} = req.body;
-     const postedBy=req.user;
+     const postedBy=req.user.userInfo.id;
+     
     // Validate required fields
-    if (!title || !category || !price || !postedBy) {
+    console.log(req.user)
+    if (!title || !category || !price ) {
         return next(new CustomError('Please provide all required fields', 400));
     }
 
@@ -42,7 +44,7 @@ const deleteOrUpdateAssignment = catchAsyncAwait(async (req, res, next) => {
     if (sell) {
         
         assignmentToUpdate.status = 'done';
-        assignmentToUpdate.completedBy = completedBy; // Set the user who completed it
+        assignmentToUpdate.completedBy = completedBy; 
         await assignmentToUpdate.save();
 
        
@@ -80,7 +82,7 @@ const getAssignments = catchAsyncAwait(async (req, res, next) => {
     };
 
    
-    const result = await assignmentService.getAssignments(filters, page, limit);
+    const result = await getAssignmentservice(filters, page, limit);
 
    
     res.status(200).json({
@@ -99,4 +101,6 @@ const getAssignments = catchAsyncAwait(async (req, res, next) => {
  
 
 
-module.exports = { createAssignments };
+module.exports = { createAssignments,getAssignments,
+    deleteOrUpdateAssignment
+ };
